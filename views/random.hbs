@@ -1,0 +1,27 @@
+<h2>randomizer</h2>
+<p>Time remaining <span>10</span> s</p>
+<ul id="items">
+    {{#each items}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+<h3>WINNER: </h3>
+<script>
+    const items = "{{{items}}}".split(",");
+    let seconds = 10;
+
+    const myInterval = setInterval(() => {
+        const randIndex = ~~(Math.random()*items.length+1);
+        document.querySelector(".fire")?.remove()
+        document.querySelector(`#items>li:nth-child(${randIndex})`).innerHTML += " <span class=\"fire\">fire</fire>";
+
+        if(seconds%1===0) document.querySelector("span").innerHTML = seconds;
+        seconds = seconds - 0.5;
+    }, 500);
+
+    setTimeout(() => {
+        clearInterval(myInterval);
+        document.querySelector(".fire").closest("li").style.textDecoration = "line-through";
+        document.querySelector("h3").innerHTML += document.querySelector(".fire").closest("li").textContent.trim().replace("fire", "")
+    }, 11000);
+</script>
